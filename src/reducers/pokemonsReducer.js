@@ -24,11 +24,10 @@ const pokemonsReducer = (state = initialState, action) => {
     case SEARCH_POKEMON:
       const newList = [...state.list]
       const filterPokemon = newList.filter(elem => elem.name.includes(action.payload))
-      console.log(filterPokemon)
-
+      console.log(filterPokemon.length)
       return {
         ...state,
-        list: filterPokemon.length !== 0 ? filterPokemon : newList
+        list: filterPokemon
       }
     default:
       return {...state}

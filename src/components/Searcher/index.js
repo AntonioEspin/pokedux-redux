@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { useDispatch } from 'react-redux';
 import { Grid, Search } from 'semantic-ui-react';
-import { searchPokemon } from '../../actions';
+import { searchPokemon, getPokemonWithDetails } from '../../actions';
 import './styles.css';
 
 export default function SearchBar() {
@@ -11,9 +11,12 @@ export default function SearchBar() {
 
   const handleSearch = (e) => {
     setValue(e.target.value)
-    console.log(value.toLowerCase())
-    dispatch(searchPokemon(value.toLowerCase()))
-    
+    console.log(value)
+    if(value !== '') {
+      dispatch(searchPokemon(value.toLowerCase().trim()))
+    } else {
+      dispatch(getPokemonWithDetails())
+    }  
   }
 
   return (
@@ -32,7 +35,6 @@ export default function SearchBar() {
             placeholder='Encuentra a tu Pokemón favorito'
             value={value}
             onSearchChange={handleSearch}
-            
           />
         </Grid.Column>
       </Grid>
